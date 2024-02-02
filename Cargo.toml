@@ -1,0 +1,15 @@
+[package]
+name = "bpm"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[profile.release]
+opt-level = "s"
+lto = "thin"
+strip = "symbols"
+codegen-units = 2
+panic = "abort"
+
+[dependencies]
+crossterm = { version = "0.27.0", default-features = false, features = ["events", "windows"] }
