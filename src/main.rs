@@ -58,7 +58,12 @@ fn run() -> Result<()> {
 		terminal::disable_raw_mode()
 	};
 
-	stdout().write_all(b"tap characters to start timing bpm\npress esc or ctrl+c to stop timing\nthe timing is from the first character pressed to the last one\n")?;
+	stdout().write_all(
+		b"\
+Press any character key to tap
+Timing is from the first tap to the last
+Press esc to finish\n",
+	)?;
 
 	// Read once to start the timer.
 	loop {
@@ -99,10 +104,11 @@ fn run() -> Result<()> {
 	}
 
 	close()?;
-	let ns = (last - start).as_nanos();
-	let minutes = ns as f64 / 60e9_f64;
+
+	let micros = (last - start).as_micros();
+	let minutes = micros as f64 / 60e6_f64;
 	let bpm = count as f64 / minutes;
-	println!("bpm: {bpm:.4}");
+	println!("bpm: {bpm:.2}");
 	Ok(())
 }
 
