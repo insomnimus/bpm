@@ -108,7 +108,8 @@ Press esc to finish\n",
 	let micros = (last - start).as_micros();
 	let minutes = micros as f64 / 60e6_f64;
 	let bpm = count as f64 / minutes;
-	println!("bpm: {bpm:.2}");
+	println!("{bpm:.2} BPM");
+	println!("{} presses in {:.1}s", count, micros as f64 / 1e6);
 	Ok(())
 }
 
